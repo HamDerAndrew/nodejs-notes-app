@@ -35,7 +35,6 @@ yargs.command({
     describe: 'Remove note',
     handler: (argv) => {
         notes.removeNote(argv.title)
-        //console.log("Removing note")
     }
 })
 
@@ -43,12 +42,12 @@ yargs.command({
 yargs.command({
     command: 'list',
     describe: 'List your notes',
-    handler: () => {
-        console.log("Listing all notes")
+    handler: (argv) => {
+        notes.listNotes(argv.title)
     }
 })
 
-// create 'red' command
+// create 'read' command
 yargs.command({
     command: 'read',
     describe: 'Read current note',

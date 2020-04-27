@@ -41,6 +41,14 @@ const removeNote = (title) => {
     }
 }
 
+const listNotes = () => {
+    const notes = loadNotes()
+    console.log(chalk.yellow.inverse("Your notes"))
+    notes.forEach(note => {
+        console.log(chalk.blue.inverse(note.title))
+    });
+}
+
 
 /* ============= */
 // "API" functions 
@@ -70,5 +78,6 @@ const loadNotes = () => {
 module.exports = {
     getNotes: getNotes,
     addNote: addNote,
-    removeNote: removeNote
+    removeNote: removeNote,
+    listNotes: listNotes
 }
