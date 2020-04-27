@@ -5,7 +5,7 @@ Clone repo and run npm install
 In your commandline run 'node app.js add --title="Note title" --body="Note body text"
 
 ## remove note
-coming soon!
+In your commandline run 'node app.js remove --title="Note title"
 
 ## read note
 coming soon!
