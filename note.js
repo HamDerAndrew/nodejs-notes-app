@@ -1,10 +1,12 @@
 const fs = require('fs');
+const chalk = require('chalk');
 
 function getNotes() {
     return "Your notes...";
 }
 
 const addNote = (title, body) => {
+    //we load the current notes so we don't have to rewrite all of them again after adding a new note.
     const notes = loadNotes()
     const duplicateNotes = notes.filter(( note ) => {
         // if note is duplicate (true) it keeps the duplicate. If it's false, it won't keep it in the array. 
@@ -18,11 +20,31 @@ const addNote = (title, body) => {
             body: body
         })
         saveNotes(notes)
-        console.log('New note added')
+        console.log(chalk.black.bgGreen('New note added'))
     } else {
-        console.log('Note title already taken')
+        console.log(chalk.white.bgRed('Note title already taken'))
     }
 }
+
+const removeNote = (title) => {
+    const notes = loadNotes()
+    //use 'filter()' to return a new array, where the note with the title to delete, is not included.
+    const notesToNotDelete = notes.filter(( note ) => {
+        return note.title !== title
+    })
+
+    if (notesToNotDelete.length < notes.length) {
+        console.log(chalk.black.bgGreen('Note removed'))
+        saveNotes(notesToNotDelete);
+    } else {
+        console.log(chalk.white.bgRed('Note doesn\'t exist'))
+    }
+}
+
+
+/* ============= */
+// "API" functions 
+/* ============= */
 
 const saveNotes = (notes) => {
     const dataJSON = JSON.stringify(notes)
@@ -43,7 +65,10 @@ const loadNotes = () => {
     }
 }
 
+
+
 module.exports = {
     getNotes: getNotes,
-    addNote: addNote
+    addNote: addNote,
+    removeNote: removeNote
 }
