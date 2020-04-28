@@ -11,4 +11,4 @@ In your commandline run 'node app.js remove --title="Note title"
 coming soon!
 
 ## list notes
-coming soon!
+In your commandline run 'node app.js list
