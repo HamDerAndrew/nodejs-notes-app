@@ -1,20 +1,14 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-function getNotes() {
-    return "Your notes...";
-}
 
 const addNote = (title, body) => {
     //we load the current notes so we don't have to rewrite all of them again after adding a new note.
     const notes = loadNotes()
-    const duplicateNotes = notes.filter(( note ) => {
-        // if note is duplicate (true) it keeps the duplicate. If it's false, it won't keep it in the array. 
-        return note.title === title
-    })
+    const duplicateNote = notes.find(( note ) => note.title === title)
 
-    //If there are no duplicate notes in the array, it is empty, and we add the note.
-    if (duplicateNotes.length === 0) {
+    //If there are no duplicate notes in the array we add the note
+    if (!duplicateNote) {
         notes.push({
             title: title,
             body: body
@@ -43,12 +37,24 @@ const removeNote = (title) => {
 
 const listNotes = () => {
     const notes = loadNotes()
+
     console.log(chalk.yellow.inverse("Your notes"))
     notes.forEach(note => {
         console.log(chalk.blue.inverse(note.title))
     });
 }
 
+const readNote = (title) => {
+    const notes = loadNotes()
+    const findNote = notes.find(( note ) => note.title === title)
+
+    if (findNote === undefined) {
+        console.log(chalk.red.inverse("Note not found"))
+    } else {
+        console.log(chalk.blue.inverse(findNote.title));
+        console.log(findNote.body)
+    }
+}
 
 /* ============= */
 // "API" functions 
@@ -76,8 +82,8 @@ const loadNotes = () => {
 
 
 module.exports = {
-    getNotes: getNotes,
     addNote: addNote,
     removeNote: removeNote,
-    listNotes: listNotes
+    listNotes: listNotes,
+    readNote: readNote
 }
