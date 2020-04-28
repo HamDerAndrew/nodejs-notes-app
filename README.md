@@ -8,7 +8,7 @@ In your commandline run 'node app.js add --title="Note title" --body="Note body 
 In your commandline run 'node app.js remove --title="Note title"
 
 ## read note
-coming soon!
+In your commandline run 'node app.js read --title="title of note". This presents the title of the note and the body text.
 
 ## list notes
 In your commandline run 'node app.js list
